@@ -933,7 +933,7 @@ int ESC_GetComponentBit(ComponentType componentType) {
 
             //the component was not found, and is probably not correctly initialized
             //so give a warning about that
-            ESC_GetComponentName(value,componentName);
+            ESC_GetComponentName(componentType, componentName);
             WriteError("componentType:%s is not correctly initialized",componentName);
             
             //break out from the while loop

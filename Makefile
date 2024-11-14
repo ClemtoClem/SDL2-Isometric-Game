@@ -6,7 +6,7 @@ TARGET    := $(PROJECT_NAME)
 SOURCES   := $(shell find $(SRCDIR) -type f -name *.c)
 OBJECTS   := $(patsubst $(SRCDIR)/%,$(BUILDDIR)/%,$(addsuffix .o,$(basename $(SOURCES))))
 DEPS      := $(patsubst $(SRCDIR)/%,$(BUILDDIR)/%,$(addsuffix .d,$(basename $(SOURCES))))
-CFLAGS    := -Wall -D_GNU_SOURCE -g
+CFLAGS    := -Wall -Wextra -D_GNU_SOURCE -g
 LIB       := $(shell sdl2-config --libs) -lSDL2 -lSDL2_image -lSDL2_ttf -lSDL2_mixer -lm
 INC       := $(shell sdl2-config --cflags)
 

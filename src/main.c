@@ -80,17 +80,17 @@ void init() {
     }
 
     ///Load the textures to the texture pool
-    TexturePool_AddTexture(game.texturePool,"data/isotiles.png");
-    TexturePool_AddTexture(game.texturePool,"data/character.png");
-    TexturePool_AddTexture(game.texturePool,"data/isotree.png");
+    TexturePool_AddTexture(game.texturePool, "data/isotiles.png");
+    TexturePool_AddTexture(game.texturePool, "data/character.png");
+    TexturePool_AddTexture(game.texturePool, "data/isotree.png");
 
     //set the font pool pointer to the game.fontPool so we can access it from other files
     FontPool_SetPointer(game.fontPool);
     //add the fonts to the font pool
-    FontPool_AddFont(game.fontPool,"data/cleanfont.png","cleanFont",9,9,7);
-    FontPool_AddFont(game.fontPool,"data/nuFont_32x32.png","nuFont",32,32,34);
-    FontPool_AddFont(game.fontPool,"data/8-bit_wonder_64x64.png","8bitWonderFont",64,64,64);
-    FontPool_AddFont(game.fontPool,"data/bitmgothic_64x64.png","gothicFont",64,64,35);
+    FontPool_AddFont(game.fontPool,"data/cleanfont.png", "cleanFont",9,9,7);
+    FontPool_AddFont(game.fontPool,"data/nuFont_32x32.png", "nuFont",32,32,34);
+    FontPool_AddFont(game.fontPool,"data/8-bit_wonder_64x64.png", "8bitWonderFont",64,64,64);
+    FontPool_AddFont(game.fontPool,"data/bitmgothic_64x64.png", "gothicFont",64,64,35);
 
     //it is possible to adjust the space for an individual character in the font as well.
     //Important, use single quotes ' ' and not double quotes " ", since it's a character and not a string.
