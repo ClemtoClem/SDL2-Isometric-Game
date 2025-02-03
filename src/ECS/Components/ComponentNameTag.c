@@ -23,7 +23,7 @@ ComponentNameTag *ComponentNameTag_New() {
     return nameTag;
 }
 void ComponentNameTag_AllocateMoreMemory(Scene *scene,int componentIndex) {
-    int j = 0;
+    Uint32 j = 0;
     ComponentNameTag *newComponentNameTag = realloc((ComponentNameTag*)scene->components[componentIndex].data,sizeof(struct ComponentNameTag)*scene->maxEntities);
     if (newComponentNameTag == NULL) {
         //write the error to the logfile

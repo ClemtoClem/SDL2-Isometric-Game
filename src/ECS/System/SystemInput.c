@@ -202,7 +202,7 @@ void SystemInput_UpdateEntity(Uint32 entity) {
                     if (mouseComponents[entity].actions[i].oldState != mouseComponents[entity].actions[i].state)
                     {
                         if (mouseComponents[entity].actions[i].state == COMPONENT_INPUTMOUSE_STATE_PRESSED) {
-                            WriteDebug("Left Mouse button is pressed:%s\n",mouseComponents[entity].actions[i].name);
+                            WriteDebug("Left Mouse button is pressed:%s",mouseComponents[entity].actions[i].name);
                         }
                     }*/
                 }
@@ -213,7 +213,7 @@ void SystemInput_UpdateEntity(Uint32 entity) {
                     if (mouseComponents[entity].actions[i].oldState != mouseComponents[entity].actions[i].state)
                     {
                         if (mouseComponents[entity].actions[i].state == COMPONENT_INPUTMOUSE_STATE_PRESSED) {
-                            WriteDebug("Middle Mouse button is pressed:%s\n",mouseComponents[entity].actions[i].name);
+                            WriteDebug("Middle Mouse button is pressed:%s",mouseComponents[entity].actions[i].name);
                         }
                     }*/
                 }
@@ -224,7 +224,7 @@ void SystemInput_UpdateEntity(Uint32 entity) {
                     if (mouseComponents[entity].actions[i].oldState != mouseComponents[entity].actions[i].state)
                     {
                         if (mouseComponents[entity].actions[i].state == COMPONENT_INPUTMOUSE_STATE_PRESSED) {
-                            WriteDebug("Right Mouse button is pressed:%s\n",mouseComponents[entity].actions[i].name);
+                            WriteDebug("Right Mouse button is pressed:%s",mouseComponents[entity].actions[i].name);
                         }
                     }*/
                 }
@@ -234,10 +234,10 @@ void SystemInput_UpdateEntity(Uint32 entity) {
 
                     /* //uncomment to test
                     if (mouseWheelState == COMPONENT_INPUTMOUSE_STATE_MOUSEWHEEL_UP) {
-                        WriteDebug("Mouse action: Mouse wheel up! State:%d\n",keyboardComponents[entity].actions[i].state);
+                        WriteDebug("Mouse action: Mouse wheel up! State:%d",keyboardComponents[entity].actions[i].state);
                     }
                     if (mouseWheelState == COMPONENT_INPUTMOUSE_STATE_MOUSEWHEEL_DOWN) {
-                        WriteDebug("Mouse action: Mouse wheel Down! State:%d\n",keyboardComponents[entity].actions[i].state);
+                        WriteDebug("Mouse action: Mouse wheel Down! State:%d",keyboardComponents[entity].actions[i].state);
                     }*/
                 }
             }
@@ -262,7 +262,7 @@ void SystemInput_UpdateEntity(Uint32 entity) {
                     keyboardComponents[entity].actions[i].state = COMPONENT_INPUTKEYBOARD_STATE_PRESSED;
                     if (keyboardComponents[entity].actions[i].name!=NULL) {
                         //uncomment the line to test
-                        //WriteDebug("Key pressed:%s\n",keyboardComponents[entity].actions[i].name);
+                        //WriteDebug("Key pressed:%s",keyboardComponents[entity].actions[i].name);
                     }
                 }
                 //if it's not pressed
@@ -277,7 +277,7 @@ void SystemInput_UpdateEntity(Uint32 entity) {
                     {
                         if (keyboardComponents[entity].actions[i].name!=NULL) {
                             //uncomment the line to test
-                            WriteDebug("Key released:%s - previous action index:%d\n",keyboardComponents[entity].actions[i].name,i);
+                            WriteDebug("Key released:%s - previous action index:%d",keyboardComponents[entity].actions[i].name,i);
                             //set previous keyboard action
                             for (int j = 0; j < NUM_OF_PREVIOUS_ACTIONS-1; ++j) {
                                 keyboardComponents[entity].previousActions[j+1] = keyboardComponents[entity].previousActions[j];

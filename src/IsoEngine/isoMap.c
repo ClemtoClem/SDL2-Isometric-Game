@@ -310,7 +310,9 @@ static int countNumberOfNeighbouringTiles(IsoMap *isoMap,int x,int y,int layer,i
     return value;
 }
 
-static void deleteSingleTiles(IsoMap *isoMap,int layer,float *noiseMap) {
+static void deleteSingleTiles(IsoMap *isoMap, int layer, float *noiseMap) {
+    (void)noiseMap;
+
     int numEmptyNeighbouringTiles = 0;
     int x=0,y=0,terrainHeight=0,value=0;
 
@@ -365,7 +367,7 @@ static int bitWiseCalculateTile(IsoMap *isoMap,int x,int y,int layer,int terrain
 }
 
 static int bitWiseCalculateInnerTiles(IsoMap *isoMap,int x,int y,int layer,int terrainHeight) {
-    int value = -1;
+    //int value = -1;
 
     int tileOffset = (terrainHeight * NUM_TILES_PER_ROW_IN_TILESET);
 
@@ -400,7 +402,7 @@ static int bitWiseCalculateInnerTiles(IsoMap *isoMap,int x,int y,int layer,int t
 }
 
 static void autoTileInnerCornerTiles(IsoMap *isoMap, int layer) {
-    int x=0,y=0,value=0;
+    int x=0,y=0;//,value=0;
     int paintTile=0;
     int terrainHeight = 0;
 
@@ -421,7 +423,7 @@ static void autoTileInnerCornerTiles(IsoMap *isoMap, int layer) {
 }
 
 static void autoTileTerrain(IsoMap *isoMap, int layer) {
-    int x=0,y=0,value=0;
+    int x=0,y=0;//,value=0;
     int paintTile=0;
     int terrainHeight = 0;
 
@@ -458,8 +460,8 @@ static void deleteTilesAtMapEdges(IsoMap *isoMap) {
 
 static void correctMinorErrorsInSlopes(IsoMap *isoMap) {
     int x=0,y=0,layer=0;
-    int value=0;
-    int paintTile=0;
+    //int value=0;
+    //int paintTile=0;
     int tileHeight = 0;
 
     //loop over the map
@@ -523,8 +525,8 @@ static void correctMinorErrorsInSlopes(IsoMap *isoMap) {
 
 
 static void isoGenerateMap(IsoMap *isoMap, int perlinSeed, int terrainHeight) {
-    int x,y;
-    int paintTile=0;
+    //int x,y;
+    //int paintTile=0;
 
     //makes sure the map exists
     if (isoMap == NULL) {

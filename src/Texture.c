@@ -23,13 +23,13 @@ int Texture_loadFromFile(Texture *texture, char *filename) {
     SDL_Surface *tmpSurface = IMG_Load(filename);
 
     if (tmpSurface == NULL) {
-        WriteError("Could not load image:%s! SDL_image Error:%s\n",filename,IMG_GetError());
+        WriteError("Could not load image:%s! SDL_image Error:%s",filename,IMG_GetError());
         return 0;
     } else {
         texture->texture = SDL_CreateTextureFromSurface(getRenderer(),tmpSurface);
 
         if (texture->texture == NULL) {
-            WriteError("Could not load image:%s! SDL_image Error:%s\n",filename,IMG_GetError());
+            WriteError("Could not load image:%s! SDL_image Error:%s",filename,IMG_GetError());
             SDL_FreeSurface(tmpSurface);
             return 0;
         } else{
@@ -63,7 +63,7 @@ int Texture_Init(Texture *texture, int x,int y, double angle, SDL_Point *center,
 
 void Texture_RenderXYClip(Texture *texture, int x, int y, SDL_Rect *cliprect) {
     if (texture == NULL) {
-        WriteError("passed texture was null!\n");
+        WriteError("passed texture was null!");
         return;
     }
     texture->x = x;

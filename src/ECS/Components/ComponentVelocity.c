@@ -30,7 +30,7 @@ ComponentVelocity *ComponentVelocity_New() {
 }
 
 void ComponentVelocity_AllocateMoreMemory(Scene *scene,int componentIndex) {
-    int j = 0;
+    Uint32 j = 0;
     ComponentVelocity *newComponentVelocity = realloc((ComponentVelocity*)scene->components[componentIndex].data,sizeof(struct ComponentVelocity)*scene->maxEntities);
     if (newComponentVelocity == NULL) {
         //write the error to the logfile

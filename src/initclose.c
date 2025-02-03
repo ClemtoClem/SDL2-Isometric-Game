@@ -9,7 +9,7 @@
 void initSDL(char *windowName) {
     
     if (SDL_Init(SDL_INIT_VIDEO)< 0) {
-        WriteError("Could not initialize SDL! SDL Error:%s\n",SDL_GetError());
+        WriteError("Could not initialize SDL! SDL Error:%s",SDL_GetError());
         exit(1);
     }
 
@@ -23,7 +23,7 @@ void initSDL(char *windowName) {
     initRenderer(windowName);
 
     if ( !(IMG_Init(IMG_INIT_PNG) & IMG_INIT_PNG)) {
-        WriteError("Could not initialize SDL_Image!) SDL_image error:%s\n",IMG_GetError());
+        WriteError("Could not initialize SDL_Image!) SDL_image error:%s",IMG_GetError());
         exit(1);
     }
 }

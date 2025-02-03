@@ -28,7 +28,7 @@ ComponentRender2D *ComponentRender2D_New() {
 }
 
 void ComponentRender2D_AllocateMoreMemory(Scene *scene,int componentIndex) {
-    int j = 0;
+    Uint32 j = 0;
     ComponentRender2D *newComponentRender2D = realloc((ComponentRender2D*)scene->components[componentIndex].data,sizeof(struct ComponentRender2D)*scene->maxEntities);
     if (newComponentRender2D == NULL) {
         //write the error to the logfile

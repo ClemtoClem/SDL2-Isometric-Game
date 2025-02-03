@@ -102,7 +102,6 @@ int FontPool_AddFont(FontPool *fontPool,char *textureFilename,char *fontName,int
 
 //this function frees the font pool and the fonts in it.
 void FontPool_Free(FontPool *fontPool) {
-    int i = 0, j = 0;
     if (fontPool != NULL) {
         //free the fonts
         if (fontPool->fonts != NULL) {

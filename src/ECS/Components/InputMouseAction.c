@@ -22,7 +22,7 @@ ComponentInputMouse *ComponentInputMouse_New() {
 }
 
 void ComponentInputMouse_AllocateMoreMemory(Scene *scene,int componentIndex) {
-    int j = 0;
+    Uint32 j = 0;
     ComponentInputMouse *newComponentInputMouse = realloc((ComponentInputMouse*)scene->components[componentIndex].data,sizeof(struct ComponentInputMouse)*scene->maxEntities);
     if (newComponentInputMouse == NULL) {
         //write the error to the logfile

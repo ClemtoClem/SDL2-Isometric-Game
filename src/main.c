@@ -282,8 +282,10 @@ void init() {
         //set the tree start position
         ComponentPosition_SetPosition(position,entity,rand()%MAP_WIDTH*32,rand()%MAP_HEIGHT*32);
 
-        //ComponentVelocity_SetVelocity(velocity,entity,10+rand()%100,10+rand()%100);
+        // set random velocity for the tree for testing
+        ComponentVelocity_SetVelocity(velocity,entity,10+rand()%100,10+rand()%100);
         ComponentVelocity_SetFriction(velocity,entity,0);
+
         //move the tree offset y position up a bit
         ComponentPosition_SetOffset(position,entity,0,-96);
 

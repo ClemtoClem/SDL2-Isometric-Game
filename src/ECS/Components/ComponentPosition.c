@@ -33,7 +33,7 @@ ComponentPosition *ComponentPosition_New() {
 }
 
 void ComponentPosition_AllocateMoreMemory(Scene *scene,int componentIndex) {
-    int j = 0;
+    Uint32 j = 0;
     ComponentPosition *newComponentPosition = realloc((ComponentPosition*)scene->components[componentIndex].data,sizeof(struct ComponentPosition)*scene->maxEntities);
     if (newComponentPosition == NULL) {
         //write the error to the logfile

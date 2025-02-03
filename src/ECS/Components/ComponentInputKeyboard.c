@@ -26,7 +26,7 @@ ComponentInputKeyboard *componentNewInputKeyboard() {
 }
 
 void componentInputKeyboardAllocateMoreMemory(Scene *scene,int componentIndex) {
-    int j = 0;
+    Uint32 j = 0;
     ComponentInputKeyboard *newComponentInputKeyboard = realloc((ComponentInputKeyboard*)scene->components[componentIndex].data,
                                                                  sizeof(struct ComponentInputKeyboard)*scene->maxEntities);
     if (newComponentInputKeyboard == NULL) {

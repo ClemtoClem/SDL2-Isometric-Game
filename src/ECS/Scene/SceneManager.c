@@ -191,12 +191,12 @@ void SceneManager_RunActiveScene(SceneManager *sceneManager) {
 
     //if the scene is without keyboard component
     if (sceneManager->scenes[sceneManager->activeScene]->sceneHasInputKeyboardComponent == 0) {
-        WriteError("Scene:%s has no keyboard component! - Functionality to exit scene by pressing ESC will be added\n",sceneManager->scenes[sceneManager->activeScene]->name);
+        WriteError("Scene:%s has no keyboard component! - Functionality to exit scene by pressing ESC will be added",sceneManager->scenes[sceneManager->activeScene]->name);
         handleExit = 1;
     }
     //if the scene is without an input system
     if (sceneManager->scenes[sceneManager->activeScene]->sceneHasInputSystem == 0) {
-        WriteError("Scene:%s has no input system! - Functionality to exit scene by pressing ESC will be added\n",sceneManager->scenes[sceneManager->activeScene]->name);
+        WriteError("Scene:%s has no input system! - Functionality to exit scene by pressing ESC will be added",sceneManager->scenes[sceneManager->activeScene]->name);
         handleExit = 1;
     }
 

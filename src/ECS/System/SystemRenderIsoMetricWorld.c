@@ -267,7 +267,7 @@ static void systemRenderIsometricObject(int entity) {
     }
 
     // uncomment to see the collision rectangles
-    /*
+    
     //draw the collision box at the base of the object
     colComponents[entity].worldRect.x = point.x +((render2DComponents[entity].texture->cliprect.w*0.5)*isoEngine->zoomLevel)
                                                 -((colComponents[entity].rect.w*0.5)*isoEngine->zoomLevel);
@@ -279,7 +279,7 @@ static void systemRenderIsometricObject(int entity) {
     colComponents[entity].worldRect.h = colComponents[entity].rect.h*isoEngine->zoomLevel;
     SDL_SetRenderDrawColor(getRenderer(),0xff,0xff,0xff,0x00);
     SDL_RenderDrawRect(getRenderer(),&colComponents[entity].worldRect);
-    */
+    
 }
 
 void SystemRenderIsoMetricWorld_Compute() {
@@ -326,7 +326,7 @@ void SystemRenderIsoMetricWorld_Compute() {
 
     //calculate the start position on the map to pick tiles from
     int startX = -6/isoEngine->zoomLevel +(isoEngine->mapScroll2Dpos.x/isoEngine->zoomLevel/isoEngine->isoMap->tileSize)*2;
-    int startY = -20/isoEngine->zoomLevel + abs((isoEngine->mapScroll2Dpos.y/isoEngine->zoomLevel/isoEngine->isoMap->tileSize))*2;
+    int startY = -20/isoEngine->zoomLevel + fabsf((isoEngine->mapScroll2Dpos.y/isoEngine->zoomLevel/isoEngine->isoMap->tileSize))*2;
 
     //calculate number of tiles in width and height that fit on the screen
     int numTilesInWidth = 8+ ((WINDOW_WIDTH/isoEngine->isoMap->tileSize)/isoEngine->zoomLevel);
@@ -415,7 +415,8 @@ void SystemRenderIsoMetricWorld_Compute() {
         g = rand()%255;
         b = rand()%255;
     }
-    /*
+
+#ifdef DEBUG
     BitmapFontString(cleanFont,"8x8 clean font to type with. Really nice for small text",2,2);
     BitmapFontStringScale(cleanFont,"Clean font scaled up 2x times",0,12,2.0);
     BitmapFontString(nuFont,"NUFONT, OLDSCHOOL DEMO-STYLE FONT",0,28);
@@ -435,7 +436,8 @@ void SystemRenderIsoMetricWorld_Compute() {
     //shadowed text by offsetting one string
     BitmapFontStringScaleColor(gothicFont,"Offset 1x times to create a shadowed text",2,416,0.50,FontPool_GetColor(0x00,0x00,0x00));
     BitmapFontStringScaleColor(gothicFont,"Offset 1x times to create a shadowed text",0,414,0.50,FontPool_GetColor(r,g,b));
-    */
+#endif
+
     IsoEngine_DrawIsoMouse(isoEngine);
 
     if (isoEngine->lastTileClicked!=-1) {
@@ -454,8 +456,8 @@ void SystemRenderIsoMetricWorld_Compute() {
         // ----------------------------------------------------------------
         // A modifier (à afficher dans l'interface)
 
-        fprintf(stdout,"FPS:%d\n",fpsFrames);
-        fprintf(stdout,"Drew %d Entities last frame\n",numEntitiesDrawnLastFrame);
+        WriteDebug("FPS:%d",fpsFrames);
+        WriteDebug("Drew %d Entities last frame",numEntitiesDrawnLastFrame);
 
         // ----------------------------------------------------------------
 

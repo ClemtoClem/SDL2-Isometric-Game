@@ -28,7 +28,7 @@ ComponentAnimation *ComponentAnimation_New() {
 }
 
 void ComponentAnimation_AllocateMoreMemory(Scene *scene,int componentIndex) {
-    int j = 0;
+    Uint32 j = 0;
     ComponentAnimation *newComponentAnimation = realloc((ComponentAnimation*)scene->components[componentIndex].data,sizeof(struct ComponentAnimation)*scene->maxEntities);
     if (newComponentAnimation == NULL) {
         //write the error to the logfile
@@ -38,7 +38,7 @@ void ComponentAnimation_AllocateMoreMemory(Scene *scene,int componentIndex) {
         return;
     }
     //initialize the component for the new entities
-    for (j=scene->numEntities;j < scene->maxEntities; ++j) {
+    for (j = scene->numEntities; j < scene->maxEntities; ++j) {
         newComponentAnimation[j].animations = NULL;
         newComponentAnimation[j].numAnimations = 0;
         newComponentAnimation[j].maxAnimations = 0;

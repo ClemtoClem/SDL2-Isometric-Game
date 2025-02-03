@@ -311,7 +311,7 @@ int Scene_AddComponentToScene(Scene *scene, ComponentType componentType) {
     //// COMPONENT NOT IMPLEMENTED
     else {
         //log that the component is not implemented yet
-        WriteError("ComponentType:%s with bit position: %d, has not been implemented, component NOT added!\n",componentName,ESC_GetComponentBit(componentType));
+        WriteError("ComponentType:%s with bit position: %d, has not been implemented, component NOT added!",componentName,ESC_GetComponentBit(componentType));
     }
     //return
     return -2;
@@ -380,7 +380,7 @@ static void freeComponentsFromScene(Scene *scene) {
             //get the component name
             ESC_GetComponentName(scene->components[i].type,componentName);
             //log the error
-            WriteError("ComponentType:%s with bit:%d is missing. Add free for it!\n",componentName,ESC_GetComponentBit(scene->components[i].type));
+            WriteError("ComponentType:%s with bit:%d is missing. Add free for it!",componentName,ESC_GetComponentBit(scene->components[i].type));
         }
     }
 }
@@ -493,15 +493,15 @@ Uint32 Scene_AddEntityToScene(Scene* scene, Uint32 componentSet1) /*,Uint32 comp
 
 //each time the entities increase, so must the components.
 static void allocateMoreMemoryForComponents(Scene *scene) {
-    Uint32 i = 0, j = 0;
+    Uint32 i = 0;
     char componentName[200];
-    ComponentPosition *newComponentPosition = NULL;
+    /*ComponentPosition *newComponentPosition = NULL;
     ComponentVelocity *newComponentVelocity = NULL;
     ComponentInputKeyboard *newComponentInputKeyboard = NULL;
     ComponentInputMouse *newComponentInputMouse = NULL;
     ComponentRender2D *newComponentRender2D = NULL;
     ComponentNameTag *newComponentNameTag = NULL;
-    ComponentCollision *newComponentCollision = NULL;
+    ComponentCollision *newComponentCollision = NULL;*/
 
     //flag that the component pointers has been reallocated
     scene->componentPointersReallocated = 1;
@@ -543,7 +543,7 @@ static void allocateMoreMemoryForComponents(Scene *scene) {
         else{
             //log the error to file
             ESC_GetComponentName(scene->components[i].type,componentName);
-            WriteError("ComponentType:%s with bit:%d has not been added here for more memory allocation!!\n",componentName,ESC_GetComponentBit(scene->components[i].type));
+            WriteError("ComponentType:%s with bit:%d has not been added here for more memory allocation!!",componentName,ESC_GetComponentBit(scene->components[i].type));
             //flag that memory allocation has failed
             scene->memallocFailed = 1;
             return;
@@ -645,7 +645,7 @@ static void moveEntityIndexInComponentsAfterEntityRemove(Scene* scene, Uint32 en
         else{
             ESC_GetComponentName(scene->components[i].type,componentName);
             //log the error
-            WriteError("ComponentType:%s with bit:%d is missing. Add it here!\n",componentName,ESC_GetComponentBit(scene->components[i].type));
+            WriteError("ComponentType:%s with bit:%d is missing. Add it here!",componentName,ESC_GetComponentBit(scene->components[i].type));
         }
     }
 }

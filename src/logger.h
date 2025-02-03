@@ -28,13 +28,14 @@
 #define WriteFatal(message, ...)   writeToLog(LOG_FATAL, __FILENAME__, __LINE__, __func__, message, ##__VA_ARGS__)
 
 void LoggerInitialize();
-void setLoggerDirectory(const char *directory);
-void setLoggerFilename(const char *fname);
-void setLoggerExtension(const char *ext);
-void setRepeatInStdout(uint8_t repeat);
-void setLoggerLevel(uint8_t level);
-size_t fileGetLineCount(const char *filename);
-void writeToLog(int level, const char *src_filename, size_t line, const char *function_name, const char *message, ...);
+void LoggerSetDirectory(const char *directory);
+void LoggerSetFilename(const char *fname);
+void LoggerSetExtension(const char *ext);
+void LoggerSetRepeatInStdout(uint8_t repeat);
+void LoggerSetLevel(uint8_t level);
+void LoggerSetTimeStamp(uint8_t enable);
 void LoggerWriteSeparator();
+
+void writeToLog(int level, const char *src_filename, size_t line, const char *function_name, const char *message, ...);
 
 #endif // __LOGGER_H

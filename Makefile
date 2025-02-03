@@ -6,7 +6,7 @@ TARGET    := $(PROJECT_NAME)
 SOURCES   := $(shell find $(SRCDIR) -type f -name *.c)
 OBJECTS   := $(patsubst $(SRCDIR)/%,$(BUILDDIR)/%,$(addsuffix .o,$(basename $(SOURCES))))
 DEPS      := $(patsubst $(SRCDIR)/%,$(BUILDDIR)/%,$(addsuffix .d,$(basename $(SOURCES))))
-CFLAGS    := -Wall -Wextra -D_GNU_SOURCE -g3
+CFLAGS    := -Wall -Wextra -D_GNU_SOURCE
 LIB       := $(shell sdl2-config --libs) -lSDL2 -lSDL2_image -lSDL2_ttf -lSDL2_mixer -lm
 INC       := $(shell sdl2-config --cflags)
 
@@ -18,6 +18,9 @@ define print_green
 endef
 
 all: $(TARGET)
+
+debug: CFLAGS += -D DEBUG -g3
+debug: all
 
 clean:
 	rm -rf $(BUILDDIR) $(TARGET)

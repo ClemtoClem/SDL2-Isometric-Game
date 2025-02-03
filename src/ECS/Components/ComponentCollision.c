@@ -26,7 +26,7 @@ ComponentCollision *ComponentCollision_New() {
 }
 
 void ComponentCollision_AllocateMoreMemory(Scene *scene,int componentIndex) {
-    int j = 0;
+    Uint32 j = 0;
     ComponentCollision *newComponentCollision = realloc((ComponentCollision*)scene->components[componentIndex].data,sizeof(struct ComponentCollision)*scene->maxEntities);
     if (newComponentCollision == NULL) {
         //write the error to the logfile

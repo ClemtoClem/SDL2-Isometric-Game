@@ -31,6 +31,8 @@ IsoEngine *IsoEngine_New() {
 }
 
 void IsoEngine_Init(IsoEngine *isoEngine, int tileSizeInPixels) {
+    (void)tileSizeInPixels;
+    (void)isoEngine;
 }
 
 void IsoEngine_Free(IsoEngine *isoEngine) {
@@ -43,6 +45,9 @@ void IsoEngine_Free(IsoEngine *isoEngine) {
 }
 
 void IsoEngine_SetMapSize(IsoEngine *isoEngine, int width, int height) {
+    (void)isoEngine;
+    (void)width;
+    (void)height;
 }
 
 void IsoEngine_Convert2DToIso(SDL_FPoint *point)
@@ -92,10 +97,10 @@ void IsoEngine_ConvertIsoCameraToCartesian(IsoEngine *isoEngine,SDL_FPoint *cart
     tmpPoint.x = tmpPoint.x/2;
 
     if (tmpPoint.x<0) {
-        tmpPoint.x = abs(tmpPoint.x);
+        tmpPoint.x = fabsf(tmpPoint.x);
     }
     else if (tmpPoint.x>0) {
-        tmpPoint.x = -abs(tmpPoint.x);
+        tmpPoint.x = -fabsf(tmpPoint.x);
     }
     *cartesianCamPos = tmpPoint;
 }
@@ -116,10 +121,10 @@ void IsoEngine_ConvertIsoPoint2DToCartesian(IsoEngine *isoEngine,SDL_FPoint *iso
     tmpPoint.x = tmpPoint.x*0.5; // same as tmpPoint.x/2;
 
     if (tmpPoint.x<0) {
-        tmpPoint.x = abs(tmpPoint.x);
+        tmpPoint.x = fabsf(tmpPoint.x);
     }
     else if (tmpPoint.x>0) {
-        tmpPoint.x = -abs(tmpPoint.x);
+        tmpPoint.x = -fabsf(tmpPoint.x);
     }
     *cartesianPoint = tmpPoint;
 }
@@ -219,7 +224,7 @@ void IsoEngine_DrawIsoMap(IsoEngine *isoEngine) {
     }
 
     int startX = -3/isoEngine->zoomLevel +(isoEngine->mapScroll2Dpos.x/isoEngine->zoomLevel/isoEngine->isoMap->tileSize)*2;
-    int startY = -20/isoEngine->zoomLevel + abs((isoEngine->mapScroll2Dpos.y/isoEngine->zoomLevel/isoEngine->isoMap->tileSize))*2;
+    int startY = -20/isoEngine->zoomLevel + fabsf((isoEngine->mapScroll2Dpos.y/isoEngine->zoomLevel/isoEngine->isoMap->tileSize))*2;
     int numTilesInWidth = ((WINDOW_WIDTH/isoEngine->isoMap->tileSize)/isoEngine->zoomLevel);
     int numTilesInHeight = ((WINDOW_HEIGHT/isoEngine->isoMap->tileSize)/isoEngine->zoomLevel)*2;
 
