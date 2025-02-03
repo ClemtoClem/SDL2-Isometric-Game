@@ -43,7 +43,7 @@ typedef struct ComponentAnimation {
     int maxAnimations;                  //current max number of animations
 } ComponentAnimation;
 
-ComponentAnimation *ComponentAnimation_New();
+[[nodiscard]] ComponentAnimation *ComponentAnimation_New();
 void ComponentAnimation_Free(ComponentAnimation *componentAnimation,int maxEntities);
 void ComponentAnimation_AllocateMoreMemory(Scene *scene,int componentIndex);
 int ComponentAnimation_CreateNewAnimation(ComponentAnimation *componentAnimation,int entity,Texture *texture,char *animationName);

@@ -11,7 +11,7 @@ typedef struct ComponentRender2D {
     int layer;              //which layer to render the component on
 } ComponentRender2D;
 
-ComponentRender2D *ComponentRender2D_New();
+[[nodiscard]] ComponentRender2D *ComponentRender2D_New();
 void ComponentRender2D_AllocateMoreMemory(Scene *scene,int componentIndex);
 void ComponentRender2D_Free(ComponentRender2D *render2Dcomponent);
 void ComponentRender2D_SetTextureAndClipRect(ComponentRender2D *render2DComponent,Uint32 entity,Texture *texture,SDL_Rect *clipRect);

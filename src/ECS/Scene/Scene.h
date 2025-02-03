@@ -41,15 +41,15 @@ typedef struct Scene {
     IsoEngine *isoEngine;                   //Pointer to isometric engine
 } Scene;
 
-Scene *Scene_CreateNewScene(char *name);
+[[nodiscard]] Scene *Scene_CreateNewScene(char *name);
 void Scene_FreeScene(Scene *scene);
 Uint32 Scene_AddEntityToScene(Scene* scene, Uint32 componentSet1);/*,Uint32 componentSet2);*/
 int Scene_AddComponentToScene(Scene *scene, ComponentType componentType);
 void Scene_RemoveEntityFromScene(Scene* scene, Uint32 entityID);
-Uint32 Scene_GetComponentIndex(Scene *scene,Uint32 componentFlag);
-void *Scene_GetComponent(Scene *scene,Uint32 componentFlag);
+[[nodiscard]] Uint32 Scene_GetComponentIndex(Scene *scene,Uint32 componentFlag);
+[[nodiscard]] void *Scene_GetComponent(Scene *scene,Uint32 componentFlag);
 
-Uint32 Scene_GetNumEntities(Scene *scene);
+[[nodiscard]] Uint32 Scene_GetNumEntities(Scene *scene);
 int Scene_AddSystemToScene(Scene *scene, SystemType systemType);
 int Scene_InitSystemsInScene(Scene *scene);
 
@@ -57,7 +57,7 @@ void Scene_UpdateSystemsInScene(Scene *scene);
 void ESC_GetSystemName(SystemType systemType,char *name);
 void ESC_GetComponentName(ComponentType componentType,char *name);
 
-int ESC_GetComponentBit(ComponentType componentType);
+[[nodiscard]] int ESC_GetComponentBit(ComponentType componentType);
 void Scene_SetCPUDelay(Scene *scene, int value);
 
 #endif // __scene_H

@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
+#include <time.h>
 #include "initclose.h"
 #include "renderer.h"
 #include "Texture.h"
@@ -54,6 +55,8 @@ static void updateComponentPointers(Scene *scene,int firstRun) {
 }
 
 void init() {
+    srand(time(NULL));
+
     int entity;
     int entityAnimation;
     int i = 0;
@@ -62,6 +65,11 @@ void init() {
 
     // initialize SDL
     LoggerInitialize();
+    LoggerWriteSeparator();
+
+#if DEBUG
+    setLoggerLevel(LOG_DEBUG);
+#endif
 
     //Create a new pool to hold all textures
     game.texturePool = TexturePool_New();
@@ -312,10 +320,10 @@ void init() {
 
 int main(int argc, char *argv[]) {
     //get rid of compiler warnings for argc and argv
-    argv = argv;
+    (void)argv;
     (void)argc;
 
-    initSDL("Isometric Game Tutorial - Part 7 - By Johan Forsblom");
+    initSDL("Isometric Game");
     init();
 
     SDL_ShowCursor(0);

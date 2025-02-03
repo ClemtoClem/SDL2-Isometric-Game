@@ -13,7 +13,7 @@ typedef struct ComponentVelocity {
     float friction;     //friction for the velocity
 } ComponentVelocity;
 
-ComponentVelocity *ComponentVelocity_New();
+[[nodiscard]] ComponentVelocity *ComponentVelocity_New();
 void ComponentVelocity_AllocateMoreMemory(Scene *scene,int componentIndex);
 void ComponentVelocity_Free(ComponentVelocity *positionVelocity);
 void ComponentVelocity_SetMaxVelocity(ComponentVelocity *velocityComponent,Uint32 entity,int maxVelocity);

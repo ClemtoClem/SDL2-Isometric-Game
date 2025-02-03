@@ -22,7 +22,7 @@ int SystemRenderIsoMetricWorld_Init(void *scene);
 void SystemRenderIsoMetricWorld_Compute();
 void SystemRenderIsoMetricWorld_Free();
 void SystemRenderIsoMetricWorld_SortEntity(Uint32 entity);
-EntitiesOnScreen *SystemRenderIsoMetricWorld_GetEntitiesOnScreen(int layer);
+[[nodiscard]] EntitiesOnScreen *SystemRenderIsoMetricWorld_GetEntitiesOnScreen(int layer);
 
 #endif // __RENDER_ISOMETRIC_SYSTEM_H_
 

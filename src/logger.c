@@ -2,84 +2,109 @@
 #include <stdarg.h>
 #include <string.h>
 #include <stdlib.h>
+#include <stdint.h>
 #include "logger.h"
 
-static char dir[255] = "./logs";
-static int loggerDirSet = 0;
-static char filename[128] = "runlog.txt";
-static int filenameSet = 0;
-static int repeat_in_stdout = 1;
-static char out_buffer[512];
+static char dir[255];
+static char filename[128];
+static char extension[16];
+static uint8_t file_setCorrectly = 0; // Bits 0-2 indiquent si dir, filename et extension sont définis
+static uint16_t count_files = 0;
+static uint8_t repeat_in_stdout = 1;
+static uint8_t logger_level = LOG_INFO;
+static char out_buffer[1024];
+static size_t current_count_lines = 0;
+static size_t max_count_lines = 10000;
 
 void LoggerInitialize() {
-    deleteLog();
-    setLoggerDirectory("./logs");
-    setLoggerFilename("runlog.txt");
+    setLoggerDirectory(LOG_DEFAULT_PATH);
+    setLoggerFilename(LOG_DEFAULT_FILENAME);
+    setLoggerExtension(LOG_DEFAULT_EXTENSION);
+    setLoggerLevel(LOG_INFO);
     setRepeatInStdout(1);
 }
 
 void setLoggerDirectory(const char *directory) {
     snprintf(dir, sizeof(dir), "%s", directory);
-    dir[sizeof(dir) - 1] = '\0';
-    loggerDirSet = 1;
+    file_setCorrectly |= 1;
 }
 
 void setLoggerFilename(const char *fname) {
     snprintf(filename, sizeof(filename), "%s", fname);
-    filename[sizeof(filename) - 1] = '\0';
-    filenameSet = 1;
+    file_setCorrectly |= 2;
 }
 
-void setRepeatInStdout(int repeat) {
+void setLoggerExtension(const char *ext) {
+    snprintf(extension, sizeof(extension), "%s", ext);
+    file_setCorrectly |= 4;
+}
+
+void setRepeatInStdout(uint8_t repeat) {
     repeat_in_stdout = repeat;
 }
 
-void deleteLog() {
-    int ret = 0;
-    char dirAndFilename[255] = "\0";
-
-    if (loggerDirSet) {
-        snprintf(dirAndFilename, sizeof(dirAndFilename), "%s/%s", dir, filename);
-    } else {
-        snprintf(dirAndFilename, sizeof(dirAndFilename), "%s", filename);
-    }
-    dirAndFilename[sizeof(dirAndFilename) - 1] = '\0';
-
-    ret = remove(dirAndFilename);
-
-    if (ret == 0) {
-        fprintf(stdout, "Log file: %s deleted successfully!\n", filename);
-    } else {
-        fprintf(stderr, "Error in deleteLog(...): unable to delete the log file: %s\n", filename);
-    }
+void setLoggerLevel(uint8_t level) {
+    logger_level = level;
 }
 
-
-void writeToLog(int level, const char *src_filename, const char *function_name, const char *message, ...) {
-    FILE *out;
-    char dirAndFilename[255] = {0};
-
-    if (loggerDirSet) {
-        snprintf(dirAndFilename, sizeof(dirAndFilename), "%s/%s", dir, filename);
-    } else {
-        snprintf(dirAndFilename, sizeof(dirAndFilename), "%s", filename);
+size_t fileGetLineCount(const char *filename) {
+    int counter = 0;
+    FILE *file = fopen(filename, "r");
+    if (file == NULL) {
+        return 0; // Retourner 0 si le fichier n'existe pas (éviter -1)
     }
-    dirAndFilename[sizeof(dirAndFilename) - 1] = '\0';
 
-    out = fopen(dirAndFilename, "a+");
+    while (fgets(out_buffer, sizeof(out_buffer), file)) {
+        counter++;
+    }
 
-    if (out == NULL) {
-        fprintf(stderr, "Error: could not open log file %s for writing\n", dirAndFilename);
+    fclose(file);
+    return counter;
+}
+
+void writeToLog(int level, const char *src_filename, size_t line, const char *function_name, const char *message, ...) {
+    if (logger_level > level) {
         return;
     }
 
-    switch (level) {
-        case LOG_INFO: snprintf(out_buffer, sizeof(out_buffer), "%s : Info in %s() - ", src_filename, function_name); break;
-        case LOG_WARNING: snprintf(out_buffer, sizeof(out_buffer), "%s : Warning in %s() - ", src_filename, function_name); break;
-        case LOG_ERROR: snprintf(out_buffer, sizeof(out_buffer), "%s : Error in %s() - ", src_filename, function_name); break;
-        case LOG_FATAL: snprintf(out_buffer, sizeof(out_buffer), "%s : Fatal Error in %s() - ", src_filename, function_name); break;
-        case LOG_DEBUG: default: snprintf(out_buffer, sizeof(out_buffer), "%s : Debug in %s() - ", src_filename, function_name); break;
+    if ((file_setCorrectly & 7) != 7) {
+        fprintf(stderr, "Logger error: directory, filename or extension is not set!\n");
+        return;
     }
+
+    char dirAndFilename[405];
+    if (current_count_lines == 0) {
+        if (count_files > 0) {
+            snprintf(dirAndFilename, sizeof(dirAndFilename), "%s/%s.%hu.%s", dir, filename, count_files, extension);
+        } else {
+            snprintf(dirAndFilename, sizeof(dirAndFilename), "%s/%s.%s", dir, filename, extension);
+        }
+        current_count_lines = fileGetLineCount(dirAndFilename);
+    }
+
+    while (current_count_lines >= max_count_lines) {
+        count_files++;
+        snprintf(dirAndFilename, sizeof(dirAndFilename), "%s/%s.%hu.%s", dir, filename, count_files, extension);
+        current_count_lines = fileGetLineCount(dirAndFilename);
+    }
+
+    FILE *out = fopen(dirAndFilename, "a");
+    if (out == NULL) {
+        fprintf(stderr, "Logger error: could not open file %s for writing\n", dirAndFilename);
+        return;
+    }
+
+    const char *levelStr;
+    switch (level) {
+        case LOG_INFO: levelStr = "Info"; break;
+        case LOG_WARNING: levelStr = "Warning"; break;
+        case LOG_ERROR: levelStr = "Error"; break;
+        case LOG_FATAL: levelStr = "Fatal"; break;
+        case LOG_DEBUG:
+        default: levelStr = "Debug"; break;
+    }
+
+    snprintf(out_buffer, sizeof(out_buffer), "%s:%lu [%s] %s() - ", src_filename, line, levelStr, function_name);
 
     va_list args;
     va_start(args, message);
@@ -88,36 +113,44 @@ void writeToLog(int level, const char *src_filename, const char *function_name, 
 
     fprintf(out, "%s\n", out_buffer);
     fclose(out);
+    current_count_lines++;
 
     if (repeat_in_stdout) {
+        const char *color;
         switch (level) {
-            case LOG_INFO: fprintf(stdout, "\033[0;32m"); break;
-            case LOG_WARNING: fprintf(stdout, "\033[0;33m"); break;
-            case LOG_ERROR: case LOG_FATAL: fprintf(stdout, "\033[0;31m"); break;
-            case LOG_DEBUG: default: fprintf(stdout, "\033[0;37m"); break;
+            case LOG_INFO: color = "\033[0;32m"; break;
+            case LOG_WARNING: color = "\033[0;33m"; break;
+            case LOG_ERROR:
+            case LOG_FATAL: color = "\033[0;31m"; break;
+            case LOG_DEBUG:
+            default: color = "\033[0;37m"; break;
         }
-        fprintf(stdout, "%s\033[0m\n", out_buffer);
+        fprintf(stdout, "%s%s\033[0m\n", color, out_buffer);
     }
 
     if (level == LOG_FATAL) {
-        exit(1);
+        exit(EXIT_FAILURE);
     }
 }
 
-void writeSeparatorToLog() {
-    FILE *out;
-    char dirAndFilename[255] = {0};
-
-    if (loggerDirSet) {
-        snprintf(dirAndFilename, sizeof(dirAndFilename), "%s/%s", dir, filename);
-    } else {
-        snprintf(dirAndFilename, sizeof(dirAndFilename), "%s", filename);
+void LoggerWriteSeparator() {
+    if ((file_setCorrectly & 7) != 7) {
+        fprintf(stderr, "Logger error: directory, filename or extension is not set!\n");
+        return;
     }
-    dirAndFilename[sizeof(dirAndFilename) - 1] = '\0';
 
-    out = fopen(dirAndFilename, "a+");
+    char dirAndFilename[405];
+    if (count_files > 0) {
+        snprintf(dirAndFilename, sizeof(dirAndFilename), "%s/%s.%hu.%s", dir, filename, count_files, extension);
+    } else {
+        snprintf(dirAndFilename, sizeof(dirAndFilename), "%s/%s.%s", dir, filename, extension);
+    }
+
+    FILE *out = fopen(dirAndFilename, "a");
     if (out != NULL) {
-        fprintf(out, "%s\n", "-------------------------------------------------------------------------------------------------------------------------");
+        fprintf(out, "----------------------------------------------------------------------------------------------------\n");
         fclose(out);
+    } else {
+        fprintf(stderr, "Logger error: could not open file %s for writing\n", dirAndFilename);
     }
 }

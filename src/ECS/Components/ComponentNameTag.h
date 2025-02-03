@@ -5,7 +5,7 @@ typedef struct ComponentNameTag {
     char *name;
 } ComponentNameTag;
 
-ComponentNameTag *ComponentNameTag_New();
+[[nodiscard]] ComponentNameTag *ComponentNameTag_New();
 void ComponentNameTag_AllocateMoreMemory(Scene *scene,int componentIndex);
 void componentNameTagSetName(ComponentNameTag *nameTagComponent,Uint32 entity,char *name);
 void ComponentNameTag_Free(ComponentNameTag *nameTagComponent,Uint32 numEntities);

@@ -18,7 +18,7 @@ SceneManager *SceneManager_CreateNewSceneManager();
 void SceneManager_SetActiveScene(SceneManager *sceneManager,char *sceneName);
 void SceneManager_CreateSceneInSceneManager(SceneManager *sceneManager,char *sceneName);
 void SceneManager_RemoveSceneFromSceneManager(SceneManager *sceneManager,char *sceneName);
-Scene *SceneManager_GetPointerToScene(SceneManager *sceneManager,char *sceneName);
+[[nodiscard]] Scene *SceneManager_GetPointerToScene(SceneManager *sceneManager,char *sceneName);
 void SceneManager_RunActiveScene(SceneManager *sceneManager);
 void SceneManager_FreeSceneManager(SceneManager *sceneManager);
 

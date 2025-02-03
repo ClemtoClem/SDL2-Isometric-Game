@@ -5,8 +5,8 @@
 #define WINDOW_HEIGHT    720
 
 void initRenderer(char *windowCaption);
-SDL_Renderer *getRenderer();
-SDL_Window *getWindow();
+[[nodiscard]] SDL_Renderer *getRenderer();
+[[nodiscard]] SDL_Window *getWindow();
 void closeRenderer();
 
 

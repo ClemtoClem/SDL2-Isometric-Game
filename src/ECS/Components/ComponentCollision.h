@@ -21,7 +21,7 @@ typedef struct ComponentCollision {
     short isColliding;              //flag to mark that there was a collision
 } ComponentCollision;
 
-ComponentCollision *ComponentCollision_New();
+[[nodiscard]] ComponentCollision *ComponentCollision_New();
 void ComponentCollision_AllocateMoreMemory(Scene *scene,int componentIndex);
 void ComponentCollision_Collision(ComponentCollision *collisionComponent);
 void ComponentCollision_SetCollisionType(ComponentCollision *collisionComponent, Uint32 entity, CollisionType collisionType);

@@ -11,6 +11,6 @@ typedef struct DeltaTimer {
 
 void DeltaTimer_Init();
 void DeltaTimer_Update();
-double DeltaTimer_GetDeltaTime();
+[[nodiscard]] double DeltaTimer_GetDeltaTime();
 
 #endif // __DELTA_TIMER_H

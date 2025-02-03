@@ -44,13 +44,13 @@ typedef struct FontPool {
     int maxFonts;       //current max number of fonts in the font pool
 } FontPool;
 
-FontPool *FontPool_NewFontPool(int initialNumFonts);
+[[nodiscard]] FontPool *FontPool_NewFontPool(int initialNumFonts);
 
 int FontPool_AddFont(FontPool *fontPool,char *textureFilename,char *fontName,int cWidth,int cHeight,int fontSpace);
 void FontPool_SetPointer(FontPool *newFontPool);
-FontPool *FontPool_GetPointer();
+[[nodiscard]] FontPool *FontPool_GetPointer();
 void FontPool_Free(FontPool *fontPool);
-Font *FontPool_GetFontByName(FontPool *fontPool,char *fontName);
+[[nodiscard]] Font *FontPool_GetFontByName(FontPool *fontPool,char *fontName);
 void FontPool_SetCharacterFontSpace(FontPool *fontPool,char *fontName,char character,int space);
 void FontPool_SetPointer(FontPool *newFontPool);
 
@@ -61,7 +61,7 @@ void BitmapFontStringScaleColor(Font *font,char *string,int x,int y,float scale,
 void BitmapFontStringCenterScale(Font *font,char *string,int x,int y,float scale);
 void BitmapFontStringCenterScaleColor(Font *font,char *string,int x,int y,float scale,SDL_Color color);
 
-SDL_Color FontPool_GetColor(int r,int g,int b);
+[[nodiscard]] SDL_Color FontPool_GetColor(int r,int g,int b);
 
 
 #endif // __FONTPOOL_H

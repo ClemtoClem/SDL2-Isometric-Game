@@ -81,12 +81,14 @@ void ComponentInputMouse_AddAction(ComponentInputMouse *componentInputMouse,int 
         return;
     }
 
+    int numActions = componentInputMouse[entity].numActions;
+
     //if memory needs to be allocated
-    if (componentInputMouse[entity].numActions >= componentInputMouse[entity].maxActions) {
+    if (numActions >= componentInputMouse[entity].maxActions) {
         //if there are no actions
         if (componentInputMouse[entity].actions == NULL) {
             //allocate memory for five actions
-            componentInputMouse[entity].maxActions+=5;
+            componentInputMouse[entity].maxActions += 5;
             componentInputMouse[entity].actions = malloc(sizeof(struct InputMouseAction)*componentInputMouse[entity].maxActions);
             if (componentInputMouse[entity].actions == NULL) {
                 WriteError("Could not allocate memory for a new Action. Action:%s was not added to entity:%d!",name,entity);
@@ -96,7 +98,7 @@ void ComponentInputMouse_AddAction(ComponentInputMouse *componentInputMouse,int 
         //if there are previous actions, re-allocate more memory
         else{
             //allocate memory for five more actions
-            componentInputMouse[entity].maxActions+=5;
+            componentInputMouse[entity].maxActions += 5;
             newMouseAction = realloc(componentInputMouse[entity].actions,sizeof(struct InputMouseAction)*componentInputMouse[entity].maxActions);
             if (newMouseAction == NULL) {
                 WriteError("Could not re-allocate more memory for mouse actions. Action:%s was not added!",name);
@@ -107,18 +109,17 @@ void ComponentInputMouse_AddAction(ComponentInputMouse *componentInputMouse,int 
         }
     }
 
-
     //add the mouse action
     //allocate memory for the name
-    componentInputMouse[entity].actions[componentInputMouse[entity].numActions].name = malloc(sizeof(char)*strlen(name)+1);
+    componentInputMouse[entity].actions[numActions].name = strdup(name);
     //copy the name
-    sprintf(componentInputMouse[entity].actions[componentInputMouse[entity].numActions].name,"%s",name);
+    sprintf(componentInputMouse[entity].actions[numActions].name,"%s",name);
     //set the mouse action
-    componentInputMouse[entity].actions[componentInputMouse[entity].numActions].mouseAction = mouseAction;
+    componentInputMouse[entity].actions[numActions].mouseAction = mouseAction;
 
     //set the mouse action states
-    componentInputMouse[entity].actions[componentInputMouse[entity].numActions].state = COMPONENT_INPUTMOUSE_STATE_RELEASED;
-    componentInputMouse[entity].actions[componentInputMouse[entity].numActions].oldState = COMPONENT_INPUTMOUSE_STATE_RELEASED;
+    componentInputMouse[entity].actions[numActions].state = COMPONENT_INPUTMOUSE_STATE_RELEASED;
+    componentInputMouse[entity].actions[numActions].oldState = COMPONENT_INPUTMOUSE_STATE_RELEASED;
 
     //Update number of actions
     componentInputMouse[entity].numActions++;
@@ -131,8 +132,7 @@ int ComponentInputMouse_GetActionIndex(ComponentInputMouse *componentInputMouse,
         //loop through the input keyboard actions of the entity
         for (i = 0; i < componentInputMouse[entity].numActions; ++i) {
             //if the name matches
-            if (strcmp(actionName,componentInputMouse[entity].actions[i].name)==0)
-            {
+            if (strcmp(actionName,componentInputMouse[entity].actions[i].name)==0) {
                 //return the index
                 return i;
             }

@@ -27,10 +27,10 @@ typedef struct IsoMap {
     IsoTileSet *tileSet;
 } IsoMap;
 
-IsoMap* isoMapCreateNewMap(char *mapName,int width,int height,int numLayers,int tileSize,int perlinSeed, int terrainHeight);
+[[nodiscard]] IsoMap* isoMapCreateNewMap(char *mapName,int width,int height,int numLayers,int tileSize,int perlinSeed, int terrainHeight);
 void isoMapFreeMap(IsoMap *isoMap);
 int isoMapLoadTileSet(IsoMap *isoMap,Texture *texture,int tileWidth,int tileHeight);
-int isoMapGetTile(IsoMap *isoMap,int x,int y,int layer);
+[[nodiscard]] int isoMapGetTile(IsoMap *isoMap,int x,int y,int layer);
 void isoMapSetTile(IsoMap *isoMap,int x,int y,int layer,int value);
 
 #endif // __ISO_MAP_H

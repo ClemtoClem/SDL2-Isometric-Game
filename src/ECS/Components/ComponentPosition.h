@@ -17,7 +17,7 @@ typedef struct ComponentPosition {
     float yOffset;  //y base, used to define where on a object its base is
 } ComponentPosition;
 
-ComponentPosition *ComponentPosition_New();
+[[nodiscard]] ComponentPosition *ComponentPosition_New();
 void ComponentPosition_Free(ComponentPosition *positionComponent);
 void ComponentPosition_AllocateMoreMemory(Scene *scene,int componentIndex);
 void ComponentPosition_SetOffset(ComponentPosition *positionComponent,Uint32 entity,float x,float y);

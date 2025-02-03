@@ -24,7 +24,7 @@ typedef struct IsoEngine {
     int gameMode;
 } IsoEngine;
 
-IsoEngine *IsoEngine_New();
+[[nodiscard]] IsoEngine *IsoEngine_New();
 void IsoEngine_Init(IsoEngine *isoEngine, int tileSizeInPixels);
 void IsoEngine_Free(IsoEngine *isoEngine);
 

@@ -3,11 +3,13 @@
 
 #include <SDL2/SDL.h>
 
-#define COMPONENT_INPUTMOUSE_STATE_RELEASED  0
-#define COMPONENT_INPUTMOUSE_STATE_PRESSED   1
-#define COMPONENT_INPUTMOUSE_STATE_MOUSE_WHEEL_NONE      0
-#define COMPONENT_INPUTMOUSE_STATE_MOUSEWHEEL_UP        1
-#define COMPONENT_INPUTMOUSE_STATE_MOUSEWHEEL_DOWN      2
+#define COMPONENT_INPUTMOUSE_STATE_RELEASED         0
+#define COMPONENT_INPUTMOUSE_STATE_JUST_PRESSED     1
+#define COMPONENT_INPUTMOUSE_STATE_PRESSED          2
+#define COMPONENT_INPUTMOUSE_STATE_JUST_RELEASED    3
+#define COMPONENT_INPUTMOUSE_STATE_MOUSE_WHEEL_NONE 0
+#define COMPONENT_INPUTMOUSE_STATE_MOUSEWHEEL_UP    1
+#define COMPONENT_INPUTMOUSE_STATE_MOUSEWHEEL_DOWN  2
 
 //forward declaration of Scene, allows us to use the Scene struct without causing a cross-referencing header error
 typedef struct Scene Scene;
@@ -34,7 +36,7 @@ typedef struct ComponentInputMouse {
     char active;                    //if the mouse component is active
 } ComponentInputMouse;
 
-ComponentInputMouse *ComponentInputMouse_New();
+[[nodiscard]] ComponentInputMouse *ComponentInputMouse_New();
 void ComponentInputMouse_AllocateMoreMemory(Scene *scene, int componentIndex);
 void ComponentInputMouse_Free(ComponentInputMouse *componentInputMouse, int numEntities);
 void ComponentInputMouse_SetActiveState(ComponentInputMouse *componentInputMouse, Uint32 entity, int value);
