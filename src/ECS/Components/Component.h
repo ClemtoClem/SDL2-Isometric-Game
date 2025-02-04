@@ -34,6 +34,7 @@ typedef enum ComponentType {
     COMPONENT_SET1_NAMETAG      = 1u << 5,  // binary: 0000 0000 0000 0000 0000 0000 00X0 0000
     COMPONENT_SET1_COLLISION    = 1u << 6,  // binary: 0000 0000 0000 0000 0000 0000 0X00 0000
     COMPONENT_SET1_ANIMATION    = 1u << 7,  // binary: 0000 0000 0000 0000 0000 0000 X000 0000
+    COMPONENT_SET1_WIDGET       = 1u << 8,  // binary: 0000 0000 0000 0000 0000 000X 0000 0000
 
     // These are connected to the Uint32 componentSet2 in the Entity struct
     //COMPONENT_SET2_UNKNOWN1       = 1u << 0,   // binary: 0000 0000 0000 0000 0000 0000 0000 000X

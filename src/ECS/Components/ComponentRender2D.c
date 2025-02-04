@@ -46,14 +46,14 @@ void ComponentRender2D_AllocateMoreMemory(Scene *scene,int componentIndex) {
     scene->components[componentIndex].data = newComponentRender2D;
 }
 
-void ComponentRender2D_Free(ComponentRender2D *render2Dcomponent) {
+void ComponentRender2D_Free(ComponentRender2D *render2DComponent) {
     //textures are not stored in the components themselves, therefore we will
     //not free the memory the texture pointer is pointing to.
 
     //if the position component is not NULL
-    if (render2Dcomponent!=NULL) {
+    if (render2DComponent!=NULL) {
         //free it
-        free(render2Dcomponent);
+        free(render2DComponent);
     }
 }
 
@@ -101,8 +101,7 @@ void ComponentRender2D_SetClipRect(ComponentRender2D *render2DComponent,Uint32 e
     if (clipRect == NULL) {
         //set the whole texture as the clip rectangle
         SetupRect(&render2DComponent[entity].texture->cliprect,0,0,render2DComponent[entity].texture->width,render2DComponent[entity].texture->height);
-    }
-    else{
+    } else{
         //set the clip rectangle
         SetupRect(&render2DComponent[entity].texture->cliprect,clipRect->x,clipRect->y,clipRect->w,clipRect->h);
     }

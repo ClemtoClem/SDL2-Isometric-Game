@@ -13,7 +13,7 @@ typedef struct ComponentRender2D {
 
 [[nodiscard]] ComponentRender2D *ComponentRender2D_New();
 void ComponentRender2D_AllocateMoreMemory(Scene *scene,int componentIndex);
-void ComponentRender2D_Free(ComponentRender2D *render2Dcomponent);
+void ComponentRender2D_Free(ComponentRender2D *render2DComponent);
 void ComponentRender2D_SetTextureAndClipRect(ComponentRender2D *render2DComponent,Uint32 entity,Texture *texture,SDL_Rect *clipRect);
 void ComponentRender2D_SetClipRect(ComponentRender2D *render2DComponent,Uint32 entity,SDL_Rect *clipRect);
 void ComponentRender2D_SetLayer(ComponentRender2D *render2DComponent,Uint32 entity,int layer);

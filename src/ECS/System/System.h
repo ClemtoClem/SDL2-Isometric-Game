@@ -26,6 +26,7 @@ typedef enum SystemType {
     SYSTEM_CONTROL_ENTITY           = 5,    // system for controlling entities
     SYSTEM_COLLISION                = 6,    // system for collision detection and handling
     SYSTEM_ANIMATION                = 7,    // system for handling entity animations
+    SYSTEM_GRAPHIC_UNIT_INTERFACE   = 8,    // system for handling graphic unit interface
 } SystemType;
 
 // system struct

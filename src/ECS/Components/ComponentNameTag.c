@@ -40,7 +40,7 @@ void ComponentNameTag_AllocateMoreMemory(Scene *scene,int componentIndex) {
     scene->components[componentIndex].data = newComponentNameTag;
 }
 
-void componentNameTagSetName(ComponentNameTag *nameTagComponent,Uint32 entity,char *name) {
+void ComponentNameTag_SetName(ComponentNameTag *nameTagComponent,Uint32 entity,char *name) {
     int length = 0;
     //if the name tag exist
     if (nameTagComponent==NULL) {

@@ -30,9 +30,9 @@ typedef struct ComponentInputKeyboard {
 ComponentInputKeyboard *componentNewInputKeyboard();
 void componentInputKeyboardAllocateMoreMemory(Scene *scene,int componentIndex);
 void componentFreeInputKeyboard(ComponentInputKeyboard *componentInputKeyboard,int numEntities);
-void componentInputKeyboardAddAction(ComponentInputKeyboard *componentInputKeyboard,int entity,char *name,SDL_Scancode scanCode);
+void ComponentInputKeyboard_AddAction(ComponentInputKeyboard *componentInputKeyboard,int entity,char *name,SDL_Scancode scanCode);
 int componentInputKeyboardGetActionIndex(ComponentInputKeyboard *componentInputKeyboard,Uint32 entity,char *actionName);
-void componentInputKeyboardSetActiveState(ComponentInputKeyboard *componentInputKeyboard,Uint32 entity,int value);
+void ComponentInputKeyboard_SetActiveState(ComponentInputKeyboard *componentInputKeyboard,Uint32 entity,int value);
 void componentKeyboardUpdateActionReleaseTimer(ComponentInputKeyboard *componentInputKeyboard,Uint32 entity);
 void componentKeyboardInitActionReleaseTimer(ComponentInputKeyboard *componentInputKeyboard,Uint32 entity);
 

@@ -118,7 +118,9 @@ void init() {
         exit(-1);
     }
 
+/// -----------------------------------------------------------------------------------------------------------------
 ///ADD COMPONENTS TO THE SCENE
+
     Scene_AddComponentToScene(testScene,COMPONENT_SET1_POSITION);
     Scene_AddComponentToScene(testScene,COMPONENT_SET1_VELOCITY);
     Scene_AddComponentToScene(testScene,COMPONENT_SET1_KEYBOARD);
@@ -137,7 +139,9 @@ void init() {
     }
     updateComponentPointers(testScene,1);
 
+/// -----------------------------------------------------------------------------------------------------------------
 ///ADD SYSTEMS TO THE SCENE
+
     Scene_AddSystemToScene(testScene,SYSTEM_INPUT);
     Scene_AddSystemToScene(testScene,SYSTEM_MOVE);
     Scene_AddSystemToScene(testScene,SYSTEM_COLLISION);
@@ -146,7 +150,9 @@ void init() {
     Scene_AddSystemToScene(testScene,SYSTEM_CONTROL_ISOMETRIC_WORLD);     //Otherwise funny artifacts can occur for drawing
     Scene_AddSystemToScene(testScene,SYSTEM_CONTROL_ENTITY);
 
+/// -----------------------------------------------------------------------------------------------------------------
 /// ISOMETRIC CONTROL ENTITY
+
     //Add isometric control entity to the scene
     entity = Scene_AddEntityToScene(testScene,
              COMPONENT_SET1_KEYBOARD | COMPONENT_SET1_NAMETAG | COMPONENT_SET1_MOUSE);
@@ -155,28 +161,29 @@ void init() {
     updateComponentPointers(testScene,0);
 
     //set the name of the entity
-    componentNameTagSetName(nameTag,entity,"isometricControls");
+    ComponentNameTag_SetName(nameTag,entity,"isometricControls");
 
     //add the arrow direction keys to the isometric controls entity
-    componentInputKeyboardAddAction(inputKeyboard,entity,"up",SDL_SCANCODE_UP);
-    componentInputKeyboardAddAction(inputKeyboard,entity,"down",SDL_SCANCODE_DOWN);
-    componentInputKeyboardAddAction(inputKeyboard,entity,"left",SDL_SCANCODE_LEFT);
-    componentInputKeyboardAddAction(inputKeyboard,entity,"right",SDL_SCANCODE_RIGHT);
+    ComponentInputKeyboard_AddAction(inputKeyboard,entity,"up",SDL_SCANCODE_UP);
+    ComponentInputKeyboard_AddAction(inputKeyboard,entity,"down",SDL_SCANCODE_DOWN);
+    ComponentInputKeyboard_AddAction(inputKeyboard,entity,"left",SDL_SCANCODE_LEFT);
+    ComponentInputKeyboard_AddAction(inputKeyboard,entity,"right",SDL_SCANCODE_RIGHT);
 
     //add mouse actions to the isometric control entity
     ComponentInputMouse_AddAction(inputMouse,entity,"mouseWheel",COMPONENT_INPUTMOUSE_ACTION_MOUSEWHEEL);
     ComponentInputMouse_AddAction(inputMouse,entity,"leftButton",COMPONENT_INPUTMOUSE_ACTION_LEFTBUTTON);
     ComponentInputMouse_AddAction(inputMouse,entity,"rightButton",COMPONENT_INPUTMOUSE_ACTION_RIGHTBUTTON);
     ComponentInputMouse_AddAction(inputMouse,entity,"middleButton",COMPONENT_INPUTMOUSE_ACTION_MIDDLEBUTTON);
-    componentInputKeyboardAddAction(inputKeyboard,entity,"toggleGameMode",SDL_SCANCODE_SPACE);
+    ComponentInputKeyboard_AddAction(inputKeyboard,entity,"toggleGameMode",SDL_SCANCODE_SPACE);
 
     //activate the mouse input
     ComponentInputMouse_SetActiveState(inputMouse,entity,1);
     //Activate keyboard input (otherwise input won't be applied on the component)
-    componentInputKeyboardSetActiveState(inputKeyboard,entity,1);
-//// END OF ISOMETRIC CONTROL ENTITY
+    ComponentInputKeyboard_SetActiveState(inputKeyboard,entity,1);
 
+/// -----------------------------------------------------------------------------------------------------------------
 /// PLAYER ENTITY
+
     //Add the player entity to the scene
     entity = Scene_AddEntityToScene(testScene,
              COMPONENT_SET1_POSITION | COMPONENT_SET1_VELOCITY |
@@ -188,7 +195,7 @@ void init() {
     updateComponentPointers(testScene,0);
 
     //set the name of the entity
-    componentNameTagSetName(nameTag,entity,"player1");
+    ComponentNameTag_SetName(nameTag,entity,"player1");
     //set the player start position
     ComponentPosition_SetPosition(position,entity,0,0);
     //move the player y position up a bit
@@ -197,13 +204,13 @@ void init() {
     ComponentVelocity_SetFriction(velocity,entity,100);
 
     //set keys to control the player
-    componentInputKeyboardAddAction(inputKeyboard,entity,"up",SDL_SCANCODE_W);
-    componentInputKeyboardAddAction(inputKeyboard,entity,"down",SDL_SCANCODE_S);
-    componentInputKeyboardAddAction(inputKeyboard,entity,"left",SDL_SCANCODE_A);
-    componentInputKeyboardAddAction(inputKeyboard,entity,"right",SDL_SCANCODE_D);
+    ComponentInputKeyboard_AddAction(inputKeyboard,entity,"up",SDL_SCANCODE_W);
+    ComponentInputKeyboard_AddAction(inputKeyboard,entity,"down",SDL_SCANCODE_S);
+    ComponentInputKeyboard_AddAction(inputKeyboard,entity,"left",SDL_SCANCODE_A);
+    ComponentInputKeyboard_AddAction(inputKeyboard,entity,"right",SDL_SCANCODE_D);
 
     //enable the keyboard input for the player entity
-    componentInputKeyboardSetActiveState(inputKeyboard,entity,1);
+    ComponentInputKeyboard_SetActiveState(inputKeyboard,entity,1);
 
     //tell the entity control system to work on the player entity
     SystemControlEntity_SetEntityToControlByID(testScene,entity);
@@ -262,9 +269,9 @@ void init() {
     ComponentAnimation_SetAnimationState(animationComp,entity,"idleDown");
     animationComp[entity].direction = ENTITY_WORLD_DIRECTION_DOWN;
 
-//// END OF PLAYER ENTITY
+/// -----------------------------------------------------------------------------------------------------------------
+/// TREES ON THE MAP
 
-/// TREES ON THE MAP!
     char msg[100];
     WriteDebug("Adding trees to scene...");
     for (i = 0; i < 1000; ++i) {
@@ -277,7 +284,7 @@ void init() {
 
         //give the tree a name
         snprintf(msg, sizeof(msg), "tree %d",i);
-        componentNameTagSetName(nameTag,entity,msg);
+        ComponentNameTag_SetName(nameTag,entity,msg);
 
         //set the tree start position
         ComponentPosition_SetPosition(position,entity,rand()%MAP_WIDTH*32,rand()%MAP_HEIGHT*32);
@@ -298,6 +305,7 @@ void init() {
         ComponentRender2D_SetLayer(render,entity,1);
     }
 
+/// -----------------------------------------------------------------------------------------------------------------
     //Setup the isometric engine
     testScene->isoEngine = IsoEngine_New();
     if (testScene->isoEngine == NULL) {

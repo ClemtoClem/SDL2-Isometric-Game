@@ -52,7 +52,7 @@ void componentInputKeyboardAllocateMoreMemory(Scene *scene,int componentIndex) {
     scene->components[componentIndex].data = newComponentInputKeyboard;
 }
 
-void componentInputKeyboardAddAction(ComponentInputKeyboard *componentInputKeyboard,int entity,char *name,SDL_Scancode scanCode) {
+void ComponentInputKeyboard_AddAction(ComponentInputKeyboard *componentInputKeyboard,int entity,char *name,SDL_Scancode scanCode) {
     int actionIndex=-1;
     InputKeyboardAction *newKeyboardAction = NULL;
     if (componentInputKeyboard == NULL) {
@@ -153,7 +153,7 @@ void componentFreeInputKeyboard(ComponentInputKeyboard *componentInputKeyboard,i
     }
 }
 
-void componentInputKeyboardSetActiveState(ComponentInputKeyboard *componentInputKeyboard,Uint32 entity,int value) {
+void ComponentInputKeyboard_SetActiveState(ComponentInputKeyboard *componentInputKeyboard,Uint32 entity,int value) {
     if (componentInputKeyboard !=NULL) {
         //if the value is 1 or 0
         if (value==1 || value == 0) {
