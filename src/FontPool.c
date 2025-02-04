@@ -192,9 +192,7 @@ void BitmapFontString(Font *font,char *string,int x,int y) {
             Texture_RenderXYClip(&font->texture,x,y,&font->c[c]);
             //move to the right with the earlier given space between each character
             x+=font->space[c];
-        }
-        else
-        {
+        } else {
             //draw the character
             Texture_RenderXYClip(&font->texture,x,y,&font->c[0]);
 
@@ -244,9 +242,7 @@ void BitmapFontStringColor(Font *font,char *string,int x,int y,SDL_Color color) 
             Texture_RenderXYClip(&font->texture,x,y,&font->c[c]);
             //move to the right with the earlier given space between each character
             x+=font->space[c];
-        }
-        else
-        {
+        } else {
             //draw the character
             Texture_RenderXYClip(&font->texture,x,y,&font->c[0]);
 
@@ -290,9 +286,7 @@ void BitmapFontStringScale(Font *font,char *string,int x,int y,float scale) {
             Texture_RenderXYClipScale(&font->texture,x,y,&font->c[c],scale);
             //move to the right with the earlier given space between each character
             x+=font->space[c]*scale;
-        }
-        else
-        {
+        } else {
             //draw the character
             Texture_RenderXYClipScale(&font->texture,x,y,&font->c[0],scale);
             //move to the right with the earlier given space between each character
@@ -345,9 +339,7 @@ void BitmapFontStringScaleColor(Font *font,char *string,int x,int y,float scale,
             Texture_RenderXYClipScale(&font->texture,x,y,&font->c[c],scale);
             //move to the right with the earlier given space between each character
             x+=font->space[c]*scale;
-        }
-        else
-        {
+        } else {
             //draw the character
             Texture_RenderXYClipScale(&font->texture,x,y,&font->c[0],scale);
             //move to the right with the earlier given space between each character
@@ -395,9 +387,7 @@ void BitmapFontStringCenterScale(Font *font,char *string,int x,int y,float scale
             Texture_RenderXYClipScale(&font->texture,x,y,&font->c[c],scale);
             //move to the right with the earlier given space between each character
             x+=font->space[c]*scale;
-        }
-        else
-        {
+        } else {
             //draw the character
             Texture_RenderXYClipScale(&font->texture,x,y,&font->c[0],scale);
             //move to the right with the earlier given space between each character
@@ -453,9 +443,7 @@ void BitmapFontStringCenterScaleColor(Font *font,char *string,int x,int y,float 
             Texture_RenderXYClipScale(&font->texture,x,y,&font->c[c],scale);
             //move to the right with the earlier given space between each character
             x+=font->space[c]*scale;
-        }
-        else
-        {
+        } else {
             //draw the character
             Texture_RenderXYClipScale(&font->texture,x,y,&font->c[0],scale);
             //move to the right with the earlier given space between each character

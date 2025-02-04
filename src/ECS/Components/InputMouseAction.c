@@ -6,7 +6,8 @@
 #include "../Scene/Scene.h"
 
 ComponentInputMouse *ComponentInputMouse_New() {
-    int i = 0;    ComponentInputMouse *newMouseComponent = malloc(sizeof(struct ComponentInputMouse)*NUM_INITIAL_ENTITIES);
+    int i = 0;
+    ComponentInputMouse *newMouseComponent = malloc(sizeof(struct ComponentInputMouse)*NUM_INITIAL_ENTITIES);
     if (newMouseComponent == NULL) {
         WriteError("Could not allocate memory for mouse input component!");
         return NULL;
@@ -41,6 +42,7 @@ void ComponentInputMouse_AllocateMoreMemory(Scene *scene,int componentIndex) {
     //point the data pointer to the new data
     scene->components[componentIndex].data = newComponentInputMouse;
 }
+
 void ComponentInputMouse_Free(ComponentInputMouse *componentInputMouse,int maxEntities) {
     int i = 0, j = 0;
     if (componentInputMouse !=NULL) {

@@ -426,6 +426,7 @@ void SystemRenderIsoMetricWorld_Compute() {
     BitmapFontStringScale(nuFont,"NUFONT SCALED 2X",0,234,2.0);
     BitmapFontStringScaleColor(cleanFont,"Clean font scaled up 3x, colored green",0,320,3.0,FontPool_GetColor(0x27,0xd7,0x00));
     BitmapFontStringScale(nuFont,"NUFONT SCALED TO 0.5X",0,350,0.5);
+    
     //write text with an outline by drawing the font 4 times with offset of 1 pixel, then the font on top
     BitmapFontStringScaleColor(gothicFont,"Draw string 4x times with offset to create an outlined text",-1,379,0.50,FontPool_GetColor(r,g,r));
     BitmapFontStringScaleColor(gothicFont,"Draw string 4x times with offset to create an outlined text",-1,381,0.50,FontPool_GetColor(r,g,r));
